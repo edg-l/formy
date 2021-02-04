@@ -38,9 +38,9 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
             impl Form for #name {
                 fn to_html() -> String {
                     let mut html = String::new();
-                    html.push_str("<form>");
+                    html.push_str("<form>\n");
                     for f in #fields_vec.iter() {
-                        html.push_str(format!("<input type='text' id='{}' name='{}'>", f, f));
+                        html.push_str(&format!("<input type='text' id='{}' name='{}'>\n", f, f));
                     }
                     html.push_str("</form>");
 

@@ -5,7 +5,7 @@ pub trait Form {
 }
 
 
-#[derive(Debug, Form)]
+#[derive(Form)]
 struct UserLogin {
     username: String,
     password: String,
