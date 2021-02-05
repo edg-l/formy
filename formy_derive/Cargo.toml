@@ -1,8 +1,10 @@
 [package]
 name = "formy_derive"
-version = "0.1.0"
+version = "0.1.0-alpha.0"
 authors = ["Edgar <git@edgarluque.com>"]
 edition = "2018"
+license = "MIT"
+description = "Derive macro implementation for 'formy'."
 
 [lib]
 proc-macro = true
