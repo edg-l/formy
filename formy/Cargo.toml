@@ -7,4 +7,4 @@ license = "MIT"
 description = "Provides a derive macro to turn structs into html forms."
 
 [dependencies]
-formy_derive = { path = "../formy_derive" }
+formy_derive = { path = "../formy_derive", version = "0.1.0-alpha.0" }
