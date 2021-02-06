@@ -5,6 +5,7 @@ authors = ["Edgar <git@edgarluque.com>"]
 edition = "2018"
 license = "MIT"
 description = "Derive macro implementation for 'formy'."
+repository = "https://github.com/edg-l/formy"
 
 [lib]
 proc-macro = true
