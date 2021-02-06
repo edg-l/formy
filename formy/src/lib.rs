@@ -14,10 +14,11 @@ mod tests {
 
     #[derive(Form)]
     struct UserLogin {
+        #[input(pattern = r"[\w]+")]
         username: String,
-        #[input = "email"]
+        #[input(type = "email", name = "real_email", class="red", id = "email")]
         email: String,
-        #[input = "password"]
+        #[input(type = "password")]
         password: String,
     }
 

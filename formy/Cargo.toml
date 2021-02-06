@@ -1,6 +1,6 @@
 [package]
 name = "formy"
-version = "0.1.0-alpha.0"
+version = "0.1.0-alpha.1"
 authors = ["Edgar <git@edgarluque.com>"]
 edition = "2018"
 license = "MIT"
@@ -8,4 +8,4 @@ description = "Provides a derive macro to turn structs into html forms."
 repository = "https://github.com/edg-l/formy"
 
 [dependencies]
-formy_derive = { path = "../formy_derive", version = "0.1.0-alpha.0" }
+formy_derive = { path = "../formy_derive", version = "0.1.0-alpha.1" }
