@@ -5,12 +5,12 @@ Work in progress, kinda learning how rust macros work.
 
 ## TODO:
 
-- [] <select>
-- [] <textarea>
-- [] <button>
-- [] <fieldset>
-- [] <legend>
-- [] <datalist>
-- [] <output>
-- [] <option>
-- [] <optgroup>
+- [ ] \<select>
+- [ ] \<textarea>
+- [ ] \<button>
+- [ ] \<fieldset>
+- [ ] \<legend>
+- [ ] \<datalist>
+- [ ] \<output>
+- [ ] \<option>
+- [ ] \<optgroup>
