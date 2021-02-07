@@ -1,6 +1,6 @@
 [package]
 name = "formy"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Edgar <git@edgarluque.com>"]
 edition = "2018"
 license = "MIT"
@@ -9,4 +9,4 @@ documentation = "https://docs.rs/formy/"
 repository = "https://github.com/edg-l/formy"
 
 [dependencies]
-formy_derive = { path = "../formy_derive", version = "0.2.0" }
+formy_derive = { path = "../formy_derive", version = "0.2.1" }
