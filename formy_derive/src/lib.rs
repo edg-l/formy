@@ -1,11 +1,12 @@
 extern crate proc_macro;
 
+use inflector::Inflector;
 use proc_macro::TokenStream;
 use quote::{quote, quote_spanned};
 use syn::spanned::Spanned;
 use syn::{self, Fields};
 
-#[proc_macro_derive(Form, attributes(input))]
+#[proc_macro_derive(Form, attributes(input, label))]
 pub fn formy_derive(input: TokenStream) -> TokenStream {
     let ast = syn::parse(input).unwrap();
     impl_formy_derive(&ast)
@@ -249,6 +250,10 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
                     let mut input_attributes = Vec::new();
 
                     let mut name_added = false;
+                    let mut id_added = false;
+                    let mut input_name = field.ident.clone().unwrap().to_string();
+                    let mut input_id = field.ident.clone().unwrap().to_string();
+                    let mut label = None;
 
                     // Parse macro attributes.
                     for attr in field.attrs.iter() {
@@ -274,6 +279,11 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
 
                                                             if value.0.is_ident("name") {
                                                                 name_added = true;
+                                                                input_name = val.clone();
+                                                            }
+                                                            else if value.0.is_ident("id") {
+                                                                id_added = true;
+                                                                input_id = val.clone();
                                                             }
 
                                                             if inp_atr.any_value {
@@ -309,12 +319,35 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
                                 return quote_spanned! { attr.path.span()=> compile_error!("'input' macro attribute must be a list, e.g: #[input(name = \"x\", type=\"text\")].");}.into();
                             }
                         }
+                        else if attr.path.is_ident("label") {
+                            let meta = attr.parse_meta().unwrap();
+
+                            if let syn::Meta::NameValue(name_val) = &meta {
+                                if let syn::Lit::Str(val) = &name_val.lit {
+                                    label = Some(val.value());
+                                }
+                                else {
+                                    return quote_spanned! {name_val.lit.span()=> compile_error!("Value must be a str.");}.into();
+                                }
+                            }
+                            else {
+                                return quote_spanned! {meta.span()=> compile_error!("Must be a name value e.g: label = \"Username:\"");}.into();
+                            }
+
+                        }
+                        else {
+                            return quote_spanned! {attr.path.span()=> compile_error!("Unrecognized attribute name.");}.into();
+                        }
                     }
 
                     if !name_added {
-                        let input_name = field.ident.clone().unwrap().to_string();
                         input_attributes.push(format!("name=\"{}\"", input_name));
                     }
+
+                    if !id_added {
+                        input_attributes.push(format!("id=\"{}\"", input_name));
+                    }
+
                     let mut inp = String::from("\t<input ");
 
                     for attr in &input_attributes {
@@ -323,6 +356,16 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
                     }
 
                     inp.push_str(">\n");
+
+                    if let Some(label) = label {
+                        let label = format!("\t<label for =\"{}\">{}</label>\n", input_id, label);
+                        inputs.push(label);
+                    }
+                    else {
+                        let label = input_name.to_title_case();
+                        let label = format!("\t<label for =\"{}\">{}:</label>\n", input_id, label);
+                        inputs.push(label);
+                    }
                     inputs.push(inp);
                 }
             }
