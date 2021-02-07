@@ -350,11 +350,11 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
                         input_attributes.push(format!("id=\"{}\"", input_name));
                     }
 
-                    let mut inp = String::from("\t<input ");
+                    let mut inp = String::from("\t<input");
 
                     for attr in &input_attributes {
-                        inp.push_str(attr);
                         inp.push_str(" ");
+                        inp.push_str(attr);
                     }
 
                     inp.push_str(">\n");
@@ -376,9 +376,13 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
             }
         }
 
+        let trait_name = proc_macro_crate::crate_name("formy").expect("formy is present in `Cargo.toml`");
+
+        let ident = syn::Ident::new(&trait_name, proc_macro2::Span::call_site());
+
         let gen = quote! {
-            impl Form for #name {
-                fn to_html() -> String {
+            impl #ident::Form for #name {
+                fn to_form() -> String {
                     let mut html = String::new();
                     html.push_str("<form>\n");
                     #( html.push_str(#inputs); )*

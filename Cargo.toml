@@ -2,5 +2,6 @@
 
 members = [
 	"formy",
-	"formy_derive"
+	"formy_derive",
+	"formy_tests"
 ]
