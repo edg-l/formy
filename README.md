@@ -4,6 +4,8 @@ A derive macro to generate HTML forms from structs.
 
 Currently in early development, only input with all its attributes is handled right now.
 
+Docs: https://docs.rs/formy/
+
 ```rust
 use formy::Form;
 

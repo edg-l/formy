@@ -2,6 +2,8 @@
 //!
 //! Currently in early development, only input with all its attributes is handled right now.
 //!
+//! Docs: https://docs.rs/formy/
+//!
 //! ```rust
 //! use formy::Form;
 //!
