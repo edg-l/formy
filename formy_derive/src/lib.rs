@@ -1,3 +1,5 @@
+//! The derive macro implementation for `formy`.
+
 extern crate proc_macro;
 
 use inflector::Inflector;
@@ -388,14 +390,6 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
         };
         gen.into()
     } else {
-        unimplemented!();
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+        return quote_spanned! {ast.span()=> compile_error!("Only structs are supported.");}.into();
     }
 }

@@ -1,3 +1,5 @@
 # formy_derive
 
-Work in progress.
+The derive macro implementation for `formy`.
+
+License: MIT
