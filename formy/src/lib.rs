@@ -33,6 +33,7 @@
 //! - [ ] \<option>
 //! - [ ] \<optgroup>
 
+/// The derive macro.
 pub use formy_derive::Form;
 
 /// A trait for structs which can be parsed into a html form.
