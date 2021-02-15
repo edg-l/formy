@@ -22,7 +22,7 @@ struct UserLogin {
     some_field: String,
 }
 
-let form = UserLogin::to_html();
+let form = UserLogin::to_form();
 ```
 
 ### TODO:
