@@ -20,7 +20,7 @@
 //!     some_field: String,
 //! }
 //!
-//! let form = UserLogin::to_html();
+//! let form = UserLogin::to_form();
 //! ```
 //!
 //! ## TODO:
@@ -40,5 +40,6 @@ pub use formy_derive::Form;
 
 /// A trait for structs which can be parsed into a html form.
 pub trait Form {
+    /// Returns the form representation of this struct.
     fn to_form() -> String;
 }

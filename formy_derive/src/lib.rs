@@ -8,6 +8,7 @@ use quote::{quote, quote_spanned};
 use syn::spanned::Spanned;
 use syn::{self, Fields};
 
+/// The macro that automatically implements the Form trait.
 #[proc_macro_derive(Form, attributes(input, label))]
 pub fn formy_derive(input: TokenStream) -> TokenStream {
     let ast = syn::parse(input).unwrap();
@@ -376,12 +377,8 @@ fn impl_formy_derive(ast: &syn::DeriveInput) -> TokenStream {
             }
         }
 
-        let trait_name = proc_macro_crate::crate_name("formy").expect("formy is present in `Cargo.toml`");
-
-        let ident = syn::Ident::new(&trait_name, proc_macro2::Span::call_site());
-
         let gen = quote! {
-            impl #ident::Form for #name {
+            impl formy::Form for #name {
                 fn to_form() -> String {
                     let mut html = String::new();
                     html.push_str("<form>\n");
